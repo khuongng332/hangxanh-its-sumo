@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-11-16T22:00:07.542587+07:00 by Eclipse SUMO netedit 1.28.0
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <!-- VTypes -->
+    <vType id="o_to" color="cyan"/>
+    <vType id="xe_buyt" vClass="bus"/>
+    <vType id="xe_may" vClass="motorcycle"/>
+    <!-- Vehicles, persons and containers (sorted by depart) -->
+    <flow id="f_0" type="o_to" begin="0.00" end="3600.00" perHour="1800.00" departLane="6" color="cyan" from="E32" to="E16" via="E33"/>
+    <flow id="f_1" type="xe_may" begin="0.00" end="3600.00" perHour="1800.00" departLane="5" color="184,0,0" from="E32" to="E16" via="E33"/>
+    <flow id="f_2" type="o_to" begin="0.00" end="3600.00" perHour="1800.00" departLane="5" color="29,184,0" from="E32" to="E16" via="E33"/>
+    <flow id="f_3" type="o_to" begin="0.00" end="3600.00" perHour="1800.00" departLane="3" color="157,17,157" from="E24" to="E42" via="E39"/>
+    <flow id="f_4" type="o_to" begin="0.00" end="3600.00" perHour="1800.00" departLane="2" color="0,0,154" from="E24" to="E42" via="E39"/>
+    <flow id="f_5" type="xe_may" begin="0.00" end="3600.00" perHour="1800.00" departLane="2" from="E24" to="E42" via="E39"/>
+    <flow id="f_6" type="xe_may" begin="0.00" end="3600.00" perHour="1800.00" departLane="1" from="E32" to="E16" via="E31 E14 E15 E8.8"/>
+    <flow id="f_7" type="xe_may" begin="0.00" end="3600.00" perHour="1800.00" departLane="0" color="140,0,0" from="E32" to="E16" via="E14 E8.24"/>
+    <flow id="f_8" type="xe_may" begin="0.00" end="3600.00" perHour="1800.00" departLane="0" color="cyan" from="E32" to="E0" via="E31 E14 E15 E8.24"/>
+    <flow id="f_9" type="o_to" begin="0.00" end="3600.00" perHour="1800.00" departLane="3" color="0,0,148" from="E32" to="E16" via="E31 E14 E15"/>
+</routes>
