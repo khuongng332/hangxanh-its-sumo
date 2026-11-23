@@ -65,6 +65,73 @@ def deterministic_ratio_score(vid: str) -> float:
     return (int(digest[:8], 16) % 1000) / 1000.0
 
 
+def try_lane_weave_if_blocked(
+    vid: str,
+    curr_edge: str,
+    step: int,
+    last_lane_change_step: dict[str, int],
+    cooldown: int = 4,
+    blocked_speed_mps: float = 5.5,
+) -> bool:
+    """
+    Kiem tra lan hien tai co xe/bi can tro khong; neu co thi tim lan ben canh
+    it xe/trong hon de chen/chuyen lan.
+    """
+    if not curr_edge or curr_edge.startswith(":"):
+        return False
+
+    prev = last_lane_change_step.get(vid, -cooldown)
+    if (step - prev) < cooldown:
+        return False
+
+    try:
+        curr_lane = traci.vehicle.getLaneIndex(vid)
+        if curr_lane < 0:
+            return False
+
+        lane_count = traci.edge.getLaneNumber(curr_edge)
+        if lane_count <= 1:
+            return False
+
+        curr_lane_id = f"{curr_edge}_{curr_lane}"
+        curr_veh_cnt = traci.lane.getLastStepVehicleNumber(curr_lane_id)
+        curr_occ = traci.lane.getLastStepOccupancy(curr_lane_id)
+        spd = traci.vehicle.getSpeed(vid)
+
+        leader_info = traci.vehicle.getLeader(vid, dist=18.0)
+        has_close_leader = leader_info is not None and leader_info[1] < 12.0
+
+        # Chi kich hoat chen lan khi lan hien tai co xe/dong xe cham hoac co xe can truoc mat
+        if not (has_close_leader or (curr_veh_cnt >= 2 and spd < blocked_speed_mps) or curr_occ > 0.25):
+            return False
+
+        best_target_lane = None
+        best_score = (curr_veh_cnt, curr_occ)
+
+        for cand_lane in (curr_lane - 1, curr_lane + 1):
+            if cand_lane < 0 or cand_lane >= lane_count:
+                continue
+            cand_lane_id = f"{curr_edge}_{cand_lane}"
+            cand_veh_cnt = traci.lane.getLastStepVehicleNumber(cand_lane_id)
+            cand_occ = traci.lane.getLastStepOccupancy(cand_lane_id)
+
+            # Uu tien lan trong xe hoac it xe/occupancy thap hon ro ret
+            if cand_veh_cnt + 1 < curr_veh_cnt or (cand_veh_cnt == 0 and curr_veh_cnt >= 1):
+                cand_score = (cand_veh_cnt, cand_occ)
+                if cand_score < best_score:
+                    best_score = cand_score
+                    best_target_lane = cand_lane
+
+        if best_target_lane is not None:
+            traci.vehicle.changeLane(vid, best_target_lane, duration=3.0)
+            last_lane_change_step[vid] = step
+            return True
+    except traci.TraCIException:
+        return False
+
+    return False
+
+
 def init_live_markdown(md_path: Path, net_file: str, rou_file: str, focus_edge: str, max_steps: int) -> None:
     header = [
         "# BÁO CÁO KHẢO SÁT MÔ PHỎNG ITS — NGÃ TƯ HÀNG XANH (SUMO + TRACI)",
@@ -87,7 +154,7 @@ def append_scenario_to_markdown(md_path: Path, r: dict) -> None:
     block = [
         f"### Kịch bản: `{r['kich_ban']}` — {r.get('ten_hien_thi', r['kich_ban'])}",
         "",
-        f"- **Số bước chạy:** {r['so_buoc']} | **Thời gian thực thi:** {r['thoi_gian_chay_s']}s | **Xe đổi lộ trình:** {r['xe_doi_lo_trinh']}",
+        f"- **Số bước chạy:** {r['so_buoc']} | **Thời gian thực thi:** {r['thoi_gian_chay_s']}s | **Xe đổi lộ trình:** {r['xe_doi_lo_trinh']} | **Lượt chen/đổi làn:** {r.get('so_lan_chen_lan', 0)}",
         f"- **Xe hoàn tất:** {r['xe_hoan_tat']} | **TG đi TB:** {r['thoi_gian_di_tb_s']}s | **TG chờ TB:** {r['thoi_gian_cho_tb_s']}s",
         f"- **Hàng đợi TB:** {r['hang_doi_tb_xe']} xe | **Hàng đợi max:** {r['hang_doi_max_xe']} xe | **Vận tốc TB:** {r['toc_do_tb_kmh']} km/h",
         f"- **Top edge hàng đợi lớn nhất:** {top_str}",
@@ -106,13 +173,13 @@ def append_summary_and_charts_to_markdown(
     lines = [
         "## 2. Bảng so sánh tổng hợp giữa các kịch bản",
         "",
-        "| Kịch bản | Bước | Chạy (s) | Xe hoàn tất | Đổi route | TG chờ TB (s) | Hàng đợi TB (xe) | Hàng đợi max (xe) | Vận tốc TB (km/h) |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| Kịch bản | Bước | Chạy (s) | Xe hoàn tất | Đổi route | Chen làn | TG chờ TB (s) | Hàng đợi TB (xe) | Hàng đợi max (xe) | Vận tốc TB (km/h) |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for r in results:
         lines.append(
             f"| `{r['kich_ban']}` | {r['so_buoc']} | {r['thoi_gian_chay_s']} | {r['xe_hoan_tat']} | "
-            f"{r['xe_doi_lo_trinh']} | {r['thoi_gian_cho_tb_s']} | {r['hang_doi_tb_xe']} | "
+            f"{r['xe_doi_lo_trinh']} | {r.get('so_lan_chen_lan', 0)} | {r['thoi_gian_cho_tb_s']} | {r['hang_doi_tb_xe']} | "
             f"{r['hang_doi_max_xe']} | {r['toc_do_tb_kmh']} |"
         )
 
@@ -197,6 +264,8 @@ def simulate_case(
     speed_cnt: dict[str, int] = defaultdict(int)
     rerouted_ids: set[str] = set()
     last_reroute_step: dict[str, int] = {}
+    last_lane_change_step: dict[str, int] = {}
+    lane_weave_count = 0
 
     done_travel: list[float] = []
     done_wait: list[float] = []
@@ -238,6 +307,16 @@ def simulate_case(
                     if w > wait_time[vid]:
                         wait_time[vid] = w
 
+            # Chuc nang: duong lan co xe thi kiem tra chen qua lan trong xe
+            # Khi phan luong (mode == "reroute"), xe co ty le chu dong lach/chen lan cao hon
+            weave_prob = 0.25 if mode == "baseline" else min(0.95, 0.35 + reroute_ratio)
+            if step % 2 == 0:
+                for vid in active:
+                    if deterministic_ratio_score(f"{vid}_{step // 4}") <= weave_prob:
+                        curr_edge = traci.vehicle.getRoadID(vid)
+                        if try_lane_weave_if_blocked(vid, curr_edge, step, last_lane_change_step):
+                            lane_weave_count += 1
+
             congested = []
             step_queue = 0
             focus_queue = 0
@@ -266,7 +345,9 @@ def simulate_case(
 
                 if need_reroute_tick:
                     edge_len = edge_lengths.get(eid, 10.0)
-                    traci.edge.adaptTraveltime(eid, edge_len / max(mean_spd, 0.5))
+                    # Tang trong so thoi gian di tren doan un tac theo muc reroute_ratio de phan luong ro ret
+                    penalty = 1.0 + (reroute_ratio * 2.5 if mean_spd < speed_threshold else reroute_ratio * 0.5)
+                    traci.edge.adaptTraveltime(eid, (edge_len / max(mean_spd, 0.5)) * penalty)
 
             q_curr = focus_queue if has_focus else step_queue
             queue_sum += q_curr
@@ -301,6 +382,7 @@ def simulate_case(
                     speed_sum.pop(vid, None)
                     speed_cnt.pop(vid, None)
                     last_reroute_step.pop(vid, None)
+                    last_lane_change_step.pop(vid, None)
 
             if need_sample_tick:
                 timeline.append({
@@ -309,6 +391,7 @@ def simulate_case(
                     "xe_dang_chay": len(active),
                     "xe_hoan_tat": len(done_travel),
                     "xe_doi_lo_trinh": len(rerouted_ids),
+                    "so_lan_chen_lan": lane_weave_count,
                     "hang_doi_nhip": step_queue,
                     "so_edge_un_tac": len(congested),
                 })
@@ -341,6 +424,7 @@ def simulate_case(
         "thoi_gian_chay_s": elapsed_s,
         "xe_hoan_tat": len(done_travel),
         "xe_doi_lo_trinh": len(rerouted_ids),
+        "so_lan_chen_lan": lane_weave_count,
         "thoi_gian_di_tb_s": round(sum(done_travel) / len(done_travel), 2) if done_travel else 0.0,
         "thoi_gian_cho_tb_s": round(sum(done_wait) / len(done_wait), 2) if done_wait else 0.0,
         "toc_do_tb_kmh": avg_speed_kmh,
@@ -365,8 +449,11 @@ def generate_two_clear_survey_charts(
     plt.rcParams["axes.unicode_minus"] = False
 
     chart1_path = f"{out_prefix}_so_do_1_bien_thien.png"
-    fig1, ax1 = plt.subplots(figsize=(9.2, 5.2))
+    fig1, ax1 = plt.subplots(figsize=(9.5, 5.4))
     palette = ["#C0262D", "#EA7A15", "#1F8A3B", "#1D6FD6"]
+    linestyles = ["-", "--", "-.", ":"]
+    linewidths = [2.4, 2.0, 1.7, 1.7]
+    alphas = [0.95, 0.90, 0.85, 0.85]
 
     max_y1 = activation_threshold
     for idx, r in enumerate(results):
@@ -377,21 +464,31 @@ def generate_two_clear_survey_charts(
         ys = np.array([pt.get("hang_doi_focus", pt.get("hang_doi_nhip", 0)) for pt in tl], dtype=float)
         if len(ys) > 0:
             max_y1 = max(max_y1, float(np.max(ys)))
+
+        col = palette[idx % len(palette)]
+        ls = linestyles[idx % len(linestyles)]
+        lw = linewidths[idx % len(linewidths)]
+        al = alphas[idx % len(alphas)]
+
         ax1.plot(
             xs,
             ys,
-            color=palette[idx % len(palette)],
-            linewidth=1.8,
-            alpha=0.92,
+            color=col,
+            linestyle=ls,
+            linewidth=lw,
+            alpha=al,
+            zorder=10 - idx,
             label=r.get("ten_hien_thi", r["kich_ban"]),
         )
-        ax1.fill_between(xs, ys, color=palette[idx % len(palette)], alpha=0.06)
+        if idx == 0:
+            ax1.fill_between(xs, ys, color=col, alpha=0.06)
 
     ax1.axhline(
         activation_threshold,
         color="#4B5563",
         linestyle="--",
         linewidth=1.3,
+        zorder=2,
         label=f"Ngưỡng kích hoạt bản đồ số ({activation_threshold:g} xe)",
     )
     ax1.set_ylim(0, max(15.0, max_y1 * 1.15))
@@ -401,13 +498,13 @@ def generate_two_clear_survey_charts(
     ax1.grid(True, linestyle="--", linewidth=0.6, alpha=0.35)
     ax1.spines["top"].set_visible(False)
     ax1.spines["right"].set_visible(False)
-    ax1.legend(loc="upper left", fontsize=9, frameon=True, facecolor="white", framealpha=0.92)
+    ax1.legend(loc="upper left", fontsize=9, frameon=True, facecolor="white", framealpha=0.95)
     fig1.tight_layout()
     fig1.savefig(chart1_path, dpi=200)
     plt.close(fig1)
 
     chart2_path = f"{out_prefix}_so_do_2_so_sanh.png"
-    fig2, ax2 = plt.subplots(figsize=(8.6, 5.2))
+    fig2, ax2 = plt.subplots(figsize=(8.8, 5.2))
 
     x_labels = [r.get("nhan_cot", r["kich_ban"]) for r in results]
     avg_queues = [r.get("hang_doi_tb_xe", 0.0) for r in results]
@@ -479,20 +576,21 @@ def generate_two_clear_survey_charts(
 
 
 def print_console_summary(results: list[dict]) -> None:
-    print("\n" + "=" * 102)
-    print(f"{'KICH BAN':<18} {'CHAY (s)':>9} {'HOAN TAT':>9} {'DOI ROUTE':>9} {'TG CHO (s)':>11} {'QUEUE TB':>10} {'VAN TOC':>10}")
-    print("-" * 102)
+    print("\n" + "=" * 114)
+    print(f"{'KICH BAN':<18} {'CHAY (s)':>9} {'HOAN TAT':>9} {'DOI ROUTE':>9} {'CHEN LAN':>9} {'TG CHO (s)':>11} {'QUEUE TB':>10} {'VAN TOC':>10}")
+    print("-" * 114)
     for r in results:
         print(
             f"{r['kich_ban']:<18} "
             f"{r['thoi_gian_chay_s']:>9} "
             f"{r['xe_hoan_tat']:>9} "
             f"{r['xe_doi_lo_trinh']:>9} "
+            f"{r.get('so_lan_chen_lan', 0):>9} "
             f"{r['thoi_gian_cho_tb_s']:>11} "
             f"{r['hang_doi_tb_xe']:>10} "
             f"{r['toc_do_tb_kmh']:>10}"
         )
-    print("=" * 102)
+    print("=" * 114)
 
 
 def main() -> None:

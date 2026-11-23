@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2026-11-20T15:58:22.722245+07:00 by Eclipse SUMO netedit 1.28.0
+<!-- generated on 2026-11-23T15:05:41.083886+07:00 by Eclipse SUMO netedit 1.28.0
 -->
 
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
@@ -10,54 +10,82 @@
     <vType id="xe_buyt" length="11.50" minGap="3.00" speedFactor="normc(0.90,0.00)" vClass="bus" width="2.50" laneChangeModel="SL2015" lcStrategic="1.2" lcCooperative="1.0" lcSpeedGain="1.2" lcKeepRight="0.4" lcAssertive="0.8" lcImpatience="0.5" accel="1.4" decel="4.0" sigma="0.5"/>
     <vType id="xe_may" length="2.00" minGap="0.80" speedFactor="normc(1.20,0.10,0.20,2.00)" vClass="motorcycle" width="0.85" laneChangeModel="SL2015" lcStrategic="2.5" lcCooperative="0.6" lcSpeedGain="5.0" lcKeepRight="0.0" lcAssertive="3.5" lcImpatience="2.0" lcTimeToImpatience="5" accel="3.5" decel="5.0" sigma="0.3"/>
     <!-- Vehicles, persons and containers (sorted by depart) -->
-    <flow id="VF_3" type="_xe_dien" begin="00:00:00" end="01:00:00" perHour="450.00" departLane="best" departSpeed="max" color="white" from="E43" to="E27" via="E29 E6"/>
-    <flow id="f_0" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="5" departSpeed="max" color="142,0,11" from="E32" to="E16" via="E33"/>
-    <flow id="f_1" type="xe_may" begin="00:00:00" end="01:00:00" perHour="336.13" departLane="5" departSpeed="max" color="184,0,0" from="E32" to="E16" via="E33"/>
-    <flow id="f_10" type="o_to" begin="00:00:00" end="01:00:00" perHour="300.00" departLane="6" color="165,0,165" from="E35" to="E42" via="E39"/>
-    <flow id="f_11" type="xe_buyt" begin="00:00:00" end="01:00:00" perHour="140.02" departLane="2" departSpeed="max" color="0,205,48" from="E32" to="E0" via="E31 E14"/>
-    <flow id="f_12" type="o_to" begin="00:00:00" end="01:00:00" perHour="500.00" departLane="4" departSpeed="max" color="blue" from="E32" to="E42" via="E31 E24.12"/>
-    <flow id="f_13" type="xe_may" begin="00:00:00" end="01:00:00" perHour="1400.78" departLane="4" departSpeed="max" color="128,0,0" from="E32" to="E41" via="E31"/>
-    <flow id="f_14" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" color="red" from="E35" to="E27" via="E11 E9 E28"/>
-    <flow id="f_15" type="_xe_dien" begin="00:00:00" end="01:00:00" perHour="140.02" departLane="best" departSpeed="max" color="cyan" from="E32" to="E16" via="E31 E14 E8.24"/>
-    <flow id="f_16" type="o_to" begin="00:00:00" end="01:00:00" perHour="450.00" departLane="1" departSpeed="max" color="white" from="E32" to="E44" via="E14 E20"/>
-    <flow id="f_17" type="xe_may" begin="00:00:00" end="01:00:00" perHour="1400.78" departLane="best" departSpeed="max" color="cyan" from="E32" to="E44" via="E14"/>
-    <flow id="f_18" type="xe_may" begin="00:00:00" end="01:00:00" perHour="400.89" departLane="best" departSpeed="max" color="193,7,7" from="E32" to="E45" via="E18"/>
-    <flow id="f_19" type="xe_buyt" begin="00:00:00" end="01:00:00" perHour="50.00" departLane="best" departSpeed="max" color="0,226,242" from="E32" to="E44" via="E31 E18"/>
-    <flow id="f_2" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="6" departSpeed="max" color="29,184,0" from="E32" to="E16" via="E33"/>
-    <flow id="f_20" type="xe_may" begin="00:00:00" end="01:00:00" perHour="900.00" departLane="0" color="blue" from="E35" to="E41" via="E11 E9 E9.36 E12 E37 E24.12"/>
-    <flow id="f_21" type="o_to" begin="00:00:00" end="01:00:00" perHour="20.00" departLane="0" color="white" from="E35" to="E27" via="E9 E28"/>
-    <flow id="f_22" type="o_to" begin="00:00:00" end="01:00:00" perHour="500.00" departLane="5" color="blue" from="E35" to="E42" via="E11 E9 E24.12"/>
-    <flow id="f_23" type="xe_may" begin="00:00:00" end="01:00:00" perHour="500.00" departLane="1" color="red" from="E35" to="E41" via="E11 E24.12"/>
-    <flow id="f_24" type="xe_may" begin="00:00:00" end="01:00:00" perHour="500.00" departLane="2" from="E35" to="E41" via="E11"/>
-    <flow id="f_25" type="xe_may" begin="00:00:00" end="01:00:00" perHour="336.13" departLane="5" departSpeed="max" from="E32" to="E16" via="E33"/>
-    <flow id="f_26" type="xe_may" begin="00:00:00" end="01:00:00" perHour="336.13" departLane="5" departSpeed="max" color="cyan" from="E32" to="E16" via="E33"/>
-    <flow id="f_27" type="_xe_dien" begin="00:00:00" end="01:00:00" perHour="300.00" departLane="4" color="cyan" from="E35" to="E41" via="E11 E9 E24.12"/>
-    <flow id="f_28" type="xe_buyt" begin="00:00:00" end="01:00:00" perHour="50.00" departLane="5" color="230,230,0" from="E35" to="E42" via="E11 E24.12"/>
-    <flow id="f_29" type="o_to" begin="00:00:00" end="01:00:00" perHour="300.00" departLane="3" color="0,181,0" from="E35" to="E42" via="E11 E24.12"/>
-    <flow id="f_3" type="_xe_dien" begin="00:00:00" end="01:00:00" perHour="100.00" departLane="7" color="cyan" from="E35" to="E42" via="E39"/>
-    <flow id="f_32" type="o_to" begin="00:00:00" end="01:00:00" perHour="500.00" departLane="2" departSpeed="max" color="217,217,0" from="E32" to="E0" via="E14 E8.24"/>
-    <flow id="f_36" type="xe_may" begin="00:00:00" end="01:00:00" perHour="1348.31" departLane="best" departSpeed="max" color="111,0,177" from="E32" to="E0" via="E31 E8.24"/>
-    <flow id="f_37" type="o_to" begin="00:00:00" end="01:00:00" perHour="450.00" departLane="1" departSpeed="max" color="111,0,177" from="E32" to="E0" via="E31 E8.24"/>
-    <flow id="f_38" type="xe_may" begin="00:00:00" end="01:00:00" perHour="1348.31" departLane="best" departSpeed="max" color="168,5,5" from="E43" to="E27" via="E29 E6"/>
-    <flow id="f_39" type="xe_may" begin="00:00:00" end="01:00:00" perHour="509.63" departLane="best" departSpeed="max" color="224,224,21" from="E26" to="E41"/>
-    <flow id="f_4" type="o_to" begin="00:00:00" end="01:00:00" perHour="100.00" departLane="7" color="red" from="E35" to="E42" via="E39"/>
-    <flow id="f_41" type="o_to" begin="00:00:00" end="01:00:00" perHour="450.00" departLane="2" departSpeed="max" color="blue" from="E43" to="E27" via="E29"/>
-    <flow id="f_42" type="xe_may" begin="00:00:00" end="01:00:00" perHour="1348.31" departLane="1" departSpeed="max" color="red" from="E43" to="E0" via="E29 E30"/>
-    <flow id="f_43" type="o_to" begin="00:00:00" end="01:00:00" perHour="450.00" departLane="2" departSpeed="max" color="255,43,194" from="E43" to="E0" via="E30"/>
-    <flow id="f_44" type="o_to" begin="00:00:00" end="01:00:00" perHour="450.00" departLane="2" departSpeed="max" color="255,43,194" from="E26" to="E45" via="E20"/>
-    <flow id="f_45" type="o_to" begin="00:00:00" end="01:00:00" perHour="250.00" departLane="best" departSpeed="max" color="blue" from="E26" to="E42" via="E24.12"/>
-    <flow id="f_46" type="_xe_dien" begin="00:00:00" end="01:00:00" perHour="349.85" departLane="1" departSpeed="max" color="cyan" from="E26" to="E44" via="E20"/>
-    <flow id="f_47" type="_xe_dien" begin="00:00:00" end="01:00:00" perHour="50.84" departLane="best" departSpeed="max" color="cyan" from="E26" to="E41" via="E25"/>
-    <flow id="f_48" type="xe_may" begin="00:00:00" end="01:00:00" number="600" departLane="best" departSpeed="max" color="cyan" from="E26" to="E41"/>
-    <flow id="f_49" type="xe_may" begin="00:00:00" end="01:00:00" perHour="1348.31" departLane="best" departSpeed="max" color="cyan" from="E43" to="E27" via="E29"/>
-    <flow id="f_5" type="xe_may" begin="00:00:00" end="01:00:00" perHour="700.39" departLane="6" color="blue" from="E35" to="E42" via="E39"/>
-    <flow id="f_53" type="xe_buyt" begin="00:00:00" end="01:00:00" perHour="120.00" departLane="6" departSpeed="max" color="0,205,48" from="E32" to="E16" via="E33"/>
-    <flow id="f_58" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="red" from="E26" to="E45" via="E20"/>
-    <flow id="f_59" type="xe_buyt" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="2" from="E26" to="E45" via="E22"/>
-    <flow id="f_6" type="xe_may" begin="00:00:00" end="01:00:00" perHour="336.13" departLane="3" departSpeed="max" from="E32" to="E16" via="E31 E14 E15 E8.8"/>
-    <flow id="f_61" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="red" from="E43" to="E27" via="E29 E6"/>
-    <flow id="f_63" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="red" from="E26" to="E45" via="E20"/>
-    <flow id="f_7" type="xe_may" begin="00:00:00" end="01:00:00" perHour="336.13" departLane="2" departSpeed="max" color="140,0,0" from="E32" to="E16" via="E14 E8.24"/>
-    <flow id="f_8" type="xe_may" begin="00:00:00" end="01:00:00" perHour="1348.31" departLane="best" departSpeed="max" color="cyan" from="E32" to="E0" via="E31 E14 E15 E8.24"/>
-    <flow id="f_9" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="3" departSpeed="max" color="0,0,148" from="E32" to="E16" via="E31 E14 E15"/>
+    <flow id="f_0" type="xe_may" begin="00:00:00" end="01:00:00" perHour="700.39" departLane="0" from="E35" to="E27" via="E11 E28"/>
+    <flow id="f_1" type="xe_may" begin="00:00:00" end="01:00:00" perHour="800.00" departLane="0" color="cyan" from="E32" to="E45" via="E31 E18"/>
+    <flow id="f_10" type="o_to" begin="00:00:00" end="01:00:00" perHour="500.00" departLane="3" color="blue" from="E32" to="E16" via="E31 E14 E15 E46"/>
+    <flow id="f_11" type="xe_may" begin="00:00:00" end="01:00:00" perHour="800.00" departLane="3" from="E32" to="E42" via="E31 E17"/>
+    <flow id="f_12" type="_xe_dien" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="4" color="cyan" from="E32" to="E41" via="E31 E17"/>
+    <flow id="f_13" type="o_to" begin="00:00:00" end="01:00:00" perHour="100.00" departLane="4" color="red" from="E32" to="E0" via="E31 E14 E8 E46"/>
+    <flow id="f_14" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="6" color="green" from="E32" to="E16" via="E33"/>
+    <flow id="f_15" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="6" color="142,0,0" from="E32" to="E16" via="E33"/>
+    <flow id="f_16" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="5" color="198,0,198" from="E32" to="E16" via="E33"/>
+    <flow id="f_17" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="5" color="220,7,7" from="E32" to="E16" via="E33"/>
+    <flow id="f_18" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="5" color="cyan" from="E32" to="E16" via="E33"/>
+    <flow id="f_19" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="5" from="E32" to="E16" via="E33"/>
+    <flow id="f_2" type="_xe_dien" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" color="cyan" from="E32" to="E44" via="E14 E34"/>
+    <flow id="f_20" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="5" color="white" from="E32" to="E16" via="E31 E14 E15 E46"/>
+    <flow id="f_21" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" color="white" from="E35" to="E27" via="E11 E28"/>
+    <flow id="f_22" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" color="red" from="E35" to="E27" via="E11 E9 E28"/>
+    <flow id="f_23" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="red" from="E35" to="E41" via="E11 E9 E38 E50"/>
+    <flow id="f_24" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="green" from="E35" to="E41" via="E11 E9"/>
+    <flow id="f_25" type="_xe_dien" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="cyan" from="E35" to="E42" via="E11 E50"/>
+    <flow id="f_26" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="2" color="cyan" from="E35" to="E41" via="E11 E9 E38"/>
+    <flow id="f_27" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="2" color="magenta" from="E35" to="E42" via="E11 E38 E50"/>
+    <flow id="f_28" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="2" color="0,0,128" from="E35" to="E42" via="E11 E50"/>
+    <flow id="f_29" type="xe_buyt" begin="00:00:00" end="01:00:00" perHour="50.00" departLane="5" from="E35" to="E42" via="E11 E9 E38 E50"/>
+    <flow id="f_3" type="xe_may" begin="00:00:00" end="01:00:00" perHour="600.00" departLane="0" color="red" from="E32" to="E0" via="E31 E15 E46"/>
+    <flow id="f_30" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="5" color="white" from="E35" to="E41" via="E11 E9 E38 E50"/>
+    <flow id="f_31" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="4" color="blue" from="E35" to="E42" via="E11"/>
+    <flow id="f_32" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="4" color="193,0,0" from="E35" to="E42" via="E11 E38"/>
+    <flow id="f_33" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="4" color="193,0,0" from="E35" to="E16" via="E10"/>
+    <flow id="f_34" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="4" color="0,155,0" from="E35" to="E41" via="E11 E50"/>
+    <flow id="f_35" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="4" color="red" from="E35" to="E0" via="E10"/>
+    <flow id="f_36" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="3" color="147,0,255" from="E35" to="E16" via="E10"/>
+    <flow id="f_37" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="3" color="147,0,255" from="E35" to="E42" via="E38"/>
+    <flow id="f_38" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="3" color="0,80,255" from="E35" to="E41" via="E11 E38"/>
+    <flow id="f_39" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="6" color="0,80,255" from="E32" to="E16" via="E33"/>
+    <flow id="f_4" type="xe_buyt" begin="00:00:00" end="01:00:00" perHour="100.00" departLane="2" color="0,188,0" from="E32" to="E0" via="E31 E14 E15 E46"/>
+    <flow id="f_40" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="5" color="magenta" from="E32" to="E16" via="E33"/>
+    <flow id="f_41" type="_xe_dien" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="5" color="cyan" from="E32" to="E16" via="E33"/>
+    <flow id="f_42" type="_xe_dien" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="7" color="cyan" from="E35" to="E42" via="E39"/>
+    <flow id="f_43" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="7" color="green" from="E35" to="E42" via="E39"/>
+    <flow id="f_44" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="6" color="red" from="E35" to="E42" via="E39"/>
+    <flow id="f_45" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="6" color="blue" from="E35" to="E42" via="E39"/>
+    <flow id="f_46" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="6" color="white" from="E35" to="E42" via="E39"/>
+    <flow id="f_47" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="6" color="222,222,0" from="E35" to="E42" via="E39"/>
+    <flow id="f_48" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="7" color="red" from="E35" to="E42" via="E39"/>
+    <flow id="f_49" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="2" color="blue" from="E43" to="E27" via="E6"/>
+    <flow id="f_5" type="xe_may" begin="00:00:00" end="01:00:00" perHour="800.00" departLane="2" color="120,0,120" from="E32" to="E44" via="E14 E18"/>
+    <flow id="f_50" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="2" color="magenta" from="E43" to="E0" via="E29 E30"/>
+    <flow id="f_51" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="2" color="green" from="E43" to="E45"/>
+    <flow id="f_52" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="2" color="red" from="E43" to="E27" via="E6"/>
+    <flow id="f_53" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="212,212,0" from="E43" to="E27" via="E29 E6"/>
+    <flow id="f_54" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="cyan" from="E43" to="E45"/>
+    <flow id="f_55" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="white" from="E43" to="E0" via="E29 E30"/>
+    <flow id="f_56" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" color="white" from="E43" to="E27" via="E29 E6 E21"/>
+    <flow id="f_57" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" color="green" from="E43" to="E0" via="E29 E30"/>
+    <flow id="f_58" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" color="blue" from="E43" to="E27" via="E29 E7"/>
+    <flow id="f_59" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" from="E43" to="E45"/>
+    <flow id="f_6" type="xe_may" begin="00:00:00" end="01:00:00" perHour="500.00" departLane="0" color="cyan" from="E32" to="E16" via="E31 E14 E46"/>
+    <flow id="f_60" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" from="E43" to="E16" via="E30"/>
+    <flow id="f_61" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" from="E43" to="E27" via="E6"/>
+    <flow id="f_62" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="red" from="E43" to="E27" via="E29 E7 E21"/>
+    <flow id="f_63" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="red" from="E43" to="E0" via="E30"/>
+    <flow id="f_64" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="blue" from="E43" to="E45"/>
+    <flow id="f_65" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="2" color="blue" from="E26" to="E45" via="E22"/>
+    <flow id="f_66" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="2" color="blue" from="E26" to="E44"/>
+    <flow id="f_67" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="2" color="white" from="E26" to="E44" via="E34"/>
+    <flow id="f_68" type="xe_buyt" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="0,175,0" from="E26" to="E45" via="E34"/>
+    <flow id="f_69" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="226,226,0" from="E26" to="E45" via="E34"/>
+    <flow id="f_7" type="o_to" begin="00:00:00" end="01:00:00" perHour="500.00" departLane="1" color="white" from="E32" to="E16" via="E31 E14 E46"/>
+    <flow id="f_70" type="_xe_dien" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="cyan" from="E26" to="E44"/>
+    <flow id="f_71" type="_xe_dien" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" color="cyan" from="E26" to="E41" via="E25 E50"/>
+    <flow id="f_72" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="red" from="E26" to="E45" via="E23 E34"/>
+    <flow id="f_73" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="blue" from="E26" to="E44" via="E22 E34"/>
+    <flow id="f_74" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="1" color="210,215,9" from="E26" to="E45" via="E22 E34"/>
+    <flow id="f_75" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" color="210,215,9" from="E26" to="E41" via="E25"/>
+    <flow id="f_76" type="xe_may" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" color="white" from="E26" to="E41" via="E50"/>
+    <flow id="f_77" type="o_to" begin="00:00:00" end="01:00:00" perHour="200.00" departLane="0" color="219,21,21" from="E26" to="E42" via="E25"/>
+    <flow id="f_8" type="o_to" begin="00:00:00" end="01:00:00" perHour="500.00" departLane="1" color="142,0,142" from="E32" to="E0" via="E31 E15 E46"/>
+    <flow id="f_9" type="o_to" begin="00:00:00" end="01:00:00" perHour="400.00" departLane="2" color="236,236,23" from="E32" to="E0" via="E31 E14 E49 E46"/>
 </routes>
